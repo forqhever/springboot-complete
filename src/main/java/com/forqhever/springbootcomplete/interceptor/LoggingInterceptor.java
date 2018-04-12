@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 
 @Component
@@ -21,6 +22,13 @@ public class LoggingInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        logger.info("进入拦截器！");
+
+        // 流只能读取一次，这里读取的话Controller就会得不到数据
+//        InputStream inputStream = request.getInputStream();
+//        byte[] bytes = inputStream.readAllBytes();
+//        logger.info("拦截器input: {}", new String(bytes));
+
         request.setAttribute(InterceptorConstant.REQUEST_START_TIME_MILLIS, System.currentTimeMillis());
         request.setAttribute(InterceptorConstant.REQUEST_START_DATE_TIME, LocalDateTime.now());
         return true;
