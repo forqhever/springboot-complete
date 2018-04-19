@@ -1,2 +1,13 @@
 server:
   port: 8088
+
+spring:
+  kafka:
+    producer:
+      batch-size: 4096
+      retries: 2
+      buffer-memory: 40960
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: test-consumer-group

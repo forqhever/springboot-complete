@@ -28,8 +28,6 @@ public class RequestWrapperFilter implements Filter {
         logger.info("过滤器中获得：{}", requestWrapper.getRequestBody());
 
         chain.doFilter(requestWrapper, resp);
-
-        requestWrapper.closeInputStream();
     }
 
     public void init(FilterConfig config) throws ServletException {
@@ -83,11 +81,6 @@ public class RequestWrapperFilter implements Filter {
 
         String getRequestBody() {
             return requestBody;
-        }
-
-
-        void closeInputStream() throws IOException {
-            servletInputStream.close();
         }
     }
 
